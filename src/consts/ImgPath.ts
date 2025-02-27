@@ -1,0 +1,1 @@
+export const LOGIN_BACKGROUND_VIDEO = "https://res.cloudinary.com/dfqgxpk50/video/upload/v1740637614/tarot-app/background_gvgcsh.mp4"
