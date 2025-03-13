@@ -63,18 +63,18 @@ const PopUpLoginModal = ({
           <MyInput
             variant='filled'
             type='number'
-            placeholder='Nhập số điện thoại'
+            placeholder={localStrings.Login.PhoneInvalid}
             autoFocus
             maxLength={10}
-            onChange={(e: any) => {
-              setValidatedMessage('')
-              form.setFieldValue('phone', e?.target?.value)
+            onChangeText={(phone: string) => {
+              validatedMessage !== '' && setValidatedMessage('')
+              form.setFieldValue('phone', phone)
             }}
           />
         ) : (
           <>
             <Text style={{ color: 'white', marginBottom: 10 }}>
-              {"Đã gửi tới: "} 
+              {localStrings.Login.HaveSend} 
               <Text style={{ color: 'white', fontWeight: 'bold' }}>
                 {form.getFieldValue('phone')}
               </Text>
@@ -88,10 +88,11 @@ const PopUpLoginModal = ({
                 borderWidth: 0,
                 borderRadius: 10,
                 backgroundColor: 'white',
-                borderColor: 'white'
+                borderColor: 'white',
+                pointerEvents: phoneLoading ? 'none' : 'auto'
               }}
               handleTextChange={(otp: string) => {
-                setValidatedMessage('')
+                validatedMessage !== '' && setValidatedMessage('')
                 form.setFieldValue('otp', otp)
               }}
             />

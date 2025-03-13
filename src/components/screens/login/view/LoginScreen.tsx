@@ -26,7 +26,9 @@ const LoginScreen = () => {
     setLoginStep,
     form,
     closeModal,
-    handleOtp
+    handleOtp,
+    onFacebookButtonPress,
+    facebookLoading
   } = LoginViewModel();
 
   useEffect(() => {
@@ -98,7 +100,9 @@ const LoginScreen = () => {
                 backgroundColor: brandPrimaryRGB(0.7),
                 borderWidth: 0,
               }}
-              onPress={() => showToast({ type: 'success', title: 'Success', content: 'Login successfully' })}
+              loading={facebookLoading}
+              disabled={facebookLoading}
+              onPress={onFacebookButtonPress}
             >
               <View style={{ flexDirection: 'row' }}>
                 <Feather style={{ color: 'white', marginRight: 20 }} size={26} name="facebook" />

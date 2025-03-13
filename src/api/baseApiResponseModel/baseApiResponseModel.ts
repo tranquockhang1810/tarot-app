@@ -12,6 +12,7 @@ export interface Paging {
   limit: number;
   page: number;
   total: number;
+  totalPages: number;
 }
 
 export interface Error {

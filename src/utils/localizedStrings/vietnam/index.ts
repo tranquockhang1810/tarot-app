@@ -3,7 +3,31 @@ export const VnLocalizedStrings = {
     AppName: "TAROT APP",
     ErrorMessage: "Đã có lỗi xảy ra, vui lòng thử lại",
     Next: "Tiếp tục",
-    Processing: "Đang xử lý..."
+    Processing: "Đang xử lý...",
+    Exit: "Thoát",
+    Cancel: "Hủy",
+    ExitConfirm: "Bạn có chắc muốn thoát?",
+    Topic: "Chủ đề",
+    CreatedDate: "Ngày tạo",
+    FromDate: "Từ ngày",
+    ToDate: "Đến ngày",
+    Apply: "Áp dụng",
+    Report: "Báo cáo",
+    Delete: "Xóa",
+    Day: "Ngày",
+    Remain: "Còn",
+    Confirm: "Xác nhận",
+    RemainDay: "Thời hạn tin",
+    Opened: "Còn mở",
+    Closed: "Đã đóng",
+    All: "Tất cả",
+    DateRange: "Khoảng ngày"
+  },
+  Topics: {
+    health: "Sức khỏe",
+    love: "Tình yêu",
+    finance: "Tài chính",
+    family: "Gia đình",
   },
   Login: {
     LoginByPhone: "Đăng nhập bằng SĐT",
@@ -18,6 +42,38 @@ export const VnLocalizedStrings = {
     LoginFailed: "Đăng nhập thất bại",
     SentOTPSuccess: "Đã gửi mã OTP",
     SentOTPFailed: "Gửi OTP thất bại",
-    OTPVerified: "Xác nhận mã OTP thành công"
-  }
+    OTPVerified: "Xác nhận mã OTP thành công",
+    HaveSend: "Đã gửi tới: "
+  },
+  Register: {
+    Label: {
+      Fullname: "Họ và tên",
+      Phone: "Số điện thoại",
+      Gender: "Giới tính",
+      Birthday: "Ngày sinh",
+      Male: "Nam",
+      Female: "Nữ",
+    },
+    Placeholder: {
+      Fullname: "Vui lòng nhập họ và tên",
+      Phone: "Vui lòng nhập số điện thoại",
+      Gender: "Vui lòng nhập giới tính",
+      Birthday: "Vui lòng nhập ngày sinh",
+    },
+    RegisterFailed: "Đăng ký thất bại",
+    RegisterSuccess: "Đăng ký thành công",
+    Messages: {
+      FullnameRequired: "Họ tên phải có ít nhất 3 ký tự",
+      BirthdayRequired: "Ngày sinh phải là ngày quá khứ",
+      GenderRequired: "Giới tính phải là nam hoặc nữ",
+    }
+  },
+  History: {
+    GetListChatFailed: "Lỗi lấy danh sách chat",
+    FindText: "Tìm kiếm tin nhắn...",
+  },
+  Chat: {
+    EnterMessage: "Nhập tin nhắn...",
+    GetListMessageFailed: "Lỗi lấy danh sách tin nhắn",
+  },
 };

@@ -6,6 +6,7 @@ import translateLanguage from '../../utils/i18n/translateLanguage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { UserModel } from '../../api/features/login/models/UserModel';
+import { LoginResponseModel } from '@/src/api/features/login/models/LoginModel';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -36,11 +37,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   };
 
-  const onLogin = async (user: any) => {
-    await AsyncStorage.setItem('user', JSON.stringify(user.user));
-    await AsyncStorage.setItem('accesstoken', user.accessToken);
+  const onLogin = async (user: LoginResponseModel) => {
+    await AsyncStorage.setItem('user', JSON.stringify(user?.user));
+    await AsyncStorage.setItem('accesstoken', user?.accessToken || '');
     setIsAuthenticated(true);
-    setUser(user.user);
+    setUser(user?.user || null);
     router.replace('/(tabs)/home');
   }
 

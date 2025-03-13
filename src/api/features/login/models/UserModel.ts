@@ -1,5 +1,6 @@
 export interface UserModel {
   id?: string;
+  _id?: string;
   name?: string;
   phone?: string;
   status?: boolean;

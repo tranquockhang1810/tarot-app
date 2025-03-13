@@ -1,9 +1,10 @@
 import { VnLocalizedStrings } from "@/src/utils/localizedStrings/vietnam";
 import { ENGLocalizedStrings } from "@/src/utils/localizedStrings/english";
-import { UserModel } from "../../api/features/authenticate/model/LoginModel";
+import { UserModel } from "@/src/api/features/login/models/UserModel";
+import { LoginResponseModel } from "@/src/api/features/login/models/LoginModel";
 
 export interface AuthContextType {
-  onLogin: (user: any) => void;
+  onLogin: (user: LoginResponseModel) => void;
   onUpdateProfile: (user: UserModel) => void;
   onLogout: () => void;
   localStrings: typeof VnLocalizedStrings | typeof ENGLocalizedStrings; 

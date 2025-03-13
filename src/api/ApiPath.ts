@@ -1,6 +1,17 @@
 export const ApiPath = {
   // Auth
-  loginByOtp: getApiPath("auth/login-by-otp"),
+  LOGIN_BY_OTP: getApiPath("auth/login-by-otp"),
+  REGISTER:  getApiPath("auth/register"),
+  LOGIN_FACEBOOK: getApiPath("auth/login-by-facebook"),
+
+  //Topic
+  GET_TOPICS: getApiPath("topic/list"),
+
+  // Chat History
+  GET_CHAT_LIST: getApiPath("chat/list"),
+
+  // Chat messages
+  CHAT: getApiPath("chat/detail"),
 };
 
 function getApiPath(path: string) {
