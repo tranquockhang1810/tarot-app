@@ -1,11 +1,13 @@
+import { useAuth } from '@/src/context/auth/useAuth';
 import useColor from '@/src/hooks/useColor';
 import { Badge } from '@ant-design/react-native';
-import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome, Entypo } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
 
 const TabBar = () => {
   const { brandPrimaryTap, brandPrimaryDark, redError } = useColor();
+  const { localStrings } = useAuth();
   return (
     <Tabs
       screenOptions={{
@@ -22,7 +24,7 @@ const TabBar = () => {
       <Tabs.Screen
         name="home"
         options={{
-          title: "Trang chủ",
+          title: localStrings.Tabbar.Home,
           tabBarIcon: ({ color }) => (
             <View style={styles.iconWrapper}>
               <FontAwesome size={30} name="home" color={color} />
@@ -33,10 +35,10 @@ const TabBar = () => {
       <Tabs.Screen
         name="history"
         options={{
-          title: "Lịch sử",
+          title: localStrings.Tabbar.History,
           tabBarIcon: ({ color }) => (
             <View style={styles.iconWrapper}>
-              <FontAwesome size={30} name="history" color={color} />
+              <Entypo size={30} name="chat" color={color} />
             </View>
           ),
         }}
@@ -60,7 +62,7 @@ const TabBar = () => {
       <Tabs.Screen
         name="notification"
         options={{
-          title: "Thông báo",
+          title: localStrings.Tabbar.Notification,
           tabBarIcon: ({ color }) => (
             <View style={styles.iconWrapper}>
               <Badge dot styles={{ dot: { backgroundColor: redError } }}>
@@ -73,7 +75,7 @@ const TabBar = () => {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Tôi",
+          title: localStrings.Tabbar.Profile,
           tabBarIcon: ({ color }) => (
             <View style={styles.iconWrapper}>
               <FontAwesome size={30} name="user" color={color} />

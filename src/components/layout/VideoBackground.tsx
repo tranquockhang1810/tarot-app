@@ -7,23 +7,32 @@ import { LOGIN_BACKGROUND_VIDEO } from "@/src/consts/ImgPath";
 export default function VideoBackground({ children }: { children?: React.ReactNode }) {
   const videoRef = useRef<Video>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const { brandPrimary } = useColor();
+  const [isTimeout, setIsTimeout] = useState(false);
+  const { brandPrimaryDark } = useColor();
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playAsync().catch(error => console.error(error));
     }
+
+    // Nếu sau 10 giây video chưa load thì tự động hiển thị children
+    const timer = setTimeout(() => {
+      setIsTimeout(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <View style={styles.container}>
-      {/* 🔹 Loading Indicator trong lúc chờ video load */}
-      {!isVideoLoaded && (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={brandPrimary} />
+      {/* 🔹 Loading Indicator nếu video chưa load và chưa hết timeout */}
+      {!isVideoLoaded && !isTimeout && (
+        <View style={{ ...styles.loadingContainer, backgroundColor: brandPrimaryDark }}>
+          <ActivityIndicator size="large" color={"white"} />
         </View>
       )}
 
+      {/* 🔹 Video background */}
       <Video
         ref={videoRef}
         source={{ uri: LOGIN_BACKGROUND_VIDEO }}
@@ -32,9 +41,13 @@ export default function VideoBackground({ children }: { children?: React.ReactNo
         shouldPlay
         isLooping
         resizeMode={ResizeMode.COVER}
-        onLoad={() => setIsVideoLoaded(true)}
+        onLoad={() => {
+          setIsVideoLoaded(true);
+          setIsTimeout(false);
+        }}
       />
-      {isVideoLoaded && children}
+
+      {(isVideoLoaded || isTimeout) && children}
     </View>
   );
 }
@@ -47,7 +60,6 @@ const styles = StyleSheet.create({
   loadingContainer: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#000",
+    alignItems: "center"
   },
 });

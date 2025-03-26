@@ -1,7 +1,7 @@
 import { FlatList, Text, TouchableOpacity, View, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
 import Screen from "@/src/components/layout/Screen";
-import { Button, Checkbox, Drawer, Radio, SwipeAction, SwipeoutButtonProps } from "@ant-design/react-native";
+import { Button, Checkbox, Drawer, Modal, Radio, SwipeAction, SwipeoutButtonProps } from "@ant-design/react-native";
 import { Image } from "expo-image";
 import useColor from "@/src/hooks/useColor";
 import { MaterialIcons, Feather, Octicons } from "@expo/vector-icons";
@@ -13,10 +13,8 @@ import DatePicker from "react-native-date-picker";
 import { router } from "expo-router";
 import MyInput from "@/src/components/foundation/MyInput";
 import { GetRemainingDay } from "@/src/utils/helper/DateTransfer";
-
-type TopicsType = {
-  [key: string]: string;
-};
+import dayjs from "dayjs";
+import { TopicsType } from "@/src/api/features/topic/models/TopicModel";
 
 const HistoryScreen = () => {
   const { brandPrimary, violet, brandPrimaryTap, orange, redError } = useColor();
@@ -41,7 +39,10 @@ const HistoryScreen = () => {
     statusList,
     resetFilter,
     resetFlag,
-    dateFilterType, setDateFilterType
+    dateFilterType, setDateFilterType,
+    deleteChat,
+    deleteLoading,
+    selectedChat, setSelectedChat
   } = HistoryViewModel();
 
   const header = () => (
@@ -125,7 +126,7 @@ const HistoryScreen = () => {
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
           <>
             <TouchableOpacity onPress={() => setOpenFrom(true)}>
-              <Text style={{ color: "white" }}>{fromDate?.toLocaleDateString()}</Text>
+              <Text style={{ color: "white" }}>{dayjs(fromDate).format("DD/MM/YYYY")}</Text>
             </TouchableOpacity>
             <DatePicker
               modal
@@ -147,7 +148,7 @@ const HistoryScreen = () => {
           <Feather name="arrow-right" color={"white"} size={16} />
           <>
             <TouchableOpacity onPress={() => setOpenTo(true)}>
-              <Text style={{ color: "white" }}>{toDate?.toLocaleDateString()}</Text>
+              <Text style={{ color: "white" }}>{dayjs(toDate).format("DD/MM/YYYY")}</Text>
             </TouchableOpacity>
             <DatePicker
               modal
@@ -202,37 +203,32 @@ const HistoryScreen = () => {
   const right: SwipeoutButtonProps[] = [
     {
       text: (
-        <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <MaterialIcons name="report-problem" size={24} color="white" />
-          <Text style={{ color: 'white', fontSize: 10 }}>{localStrings?.GLobals?.Report}</Text>
-        </View>
+        <>
+          {deleteLoading ? (
+            <ActivityIndicator size="large" color="white" style={{ marginVertical: 30 }} />
+          ) : (
+            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <MaterialIcons name="delete" size={24} color="white" />
+              <Text style={{ color: 'white', fontSize: 10 }}>{localStrings?.GLobals?.Delete}</Text>
+            </View>
+          )}
+        </>
       ),
-      onPress: () => console.log('report'),
-      actionButtonProps: {
-        style: {
-          backgroundColor: orange,
-          borderRadius: 10,
-          marginVertical: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: 60,
-          width: 80,
-        },
+      onPress: () => {
+        Modal.alert(
+          localStrings?.GLobals?.Delete,
+          localStrings?.GLobals?.DeleteChat,
+          [
+            { text: localStrings?.GLobals?.Cancel, style: 'cancel' },
+            { text: localStrings?.GLobals?.Delete, onPress: () => { selectedChat?._id && deleteChat(selectedChat?._id) } },
+          ]
+        )
       },
-    },
-    {
-      text: (
-        <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <MaterialIcons name="delete" size={24} color="white" />
-          <Text style={{ color: 'white', fontSize: 10 }}>{localStrings?.GLobals?.Delete}</Text>
-        </View>
-      ),
-      onPress: () => console.log('delete'),
       actionButtonProps: {
         style: {
           backgroundColor: redError,
           borderRadius: 10,
-          marginHorizontal: 20,
+          marginRight: 20,
           marginVertical: 20,
           justifyContent: 'center',
           alignItems: 'center',
@@ -267,13 +263,14 @@ const HistoryScreen = () => {
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item?._id || ""}
           renderItem={({ item }) => {
-            const { createdDate, remainingDays} = GetRemainingDay(item?.createdAt);
+            const { createdDate, remaining } = GetRemainingDay(item?.createdAt, localStrings, language);
             return (
               <SwipeAction
                 right={right}
                 closeOnAction
                 closeOnTouchOutside
                 key={item?._id}
+                onSwipeableOpen={() => setSelectedChat(item)}
               >
                 <TouchableOpacity onPress={() => router.push(`/(routes)/chat/${item?._id}`)}>
                   <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingTop: 20 }}>
@@ -282,7 +279,7 @@ const HistoryScreen = () => {
                       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Text style={{ color: "white", opacity: 0.6, fontSize: 12 }}>{createdDate}</Text>
                         <Text style={{ color: "white", opacity: 0.6, fontSize: 12 }}>
-                          {localStrings?.GLobals?.Remain} {remainingDays} {localStrings.GLobals.Day.toLowerCase() + (remainingDays > 1 && language === 'en' ? 's' : '')}
+                          {remaining}
                         </Text>
                       </View>
                       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
@@ -314,15 +311,15 @@ const HistoryScreen = () => {
           }}
           onEndReached={getMoreChats}
           onEndReachedThreshold={0.1}
-          ListFooterComponent={listLoading
+          ListFooterComponent={listLoading && listChats && listChats?.length > 12
             ? <ActivityIndicator size="large" color="white" style={{ marginVertical: 30 }} />
             : <View style={{ height: 40 }}></View>
           }
           refreshing={refreshing}
           onRefresh={refreshListChats}
         />
-        <Toast />
       </Drawer>
+      <Toast />
     </Screen>
   );
 };

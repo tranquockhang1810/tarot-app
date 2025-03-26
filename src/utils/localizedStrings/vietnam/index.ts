@@ -14,6 +14,7 @@ export const VnLocalizedStrings = {
     Apply: "Áp dụng",
     Report: "Báo cáo",
     Delete: "Xóa",
+    DeleteChat: "Bạn có muốn xóa đoạn chat này?",
     Day: "Ngày",
     Remain: "Còn",
     Confirm: "Xác nhận",
@@ -21,13 +22,18 @@ export const VnLocalizedStrings = {
     Opened: "Còn mở",
     Closed: "Đã đóng",
     All: "Tất cả",
-    DateRange: "Khoảng ngày"
+    DateRange: "Khoảng ngày",
+    Options: "Tùy chọn",
+    Cards: "Lá bài",
+    Submit: "Xác nhận"
   },
   Topics: {
     health: "Sức khỏe",
     love: "Tình yêu",
     finance: "Tài chính",
     family: "Gia đình",
+    career: "Sự nghiệp",
+    social: "Xã hội"
   },
   Login: {
     LoginByPhone: "Đăng nhập bằng SĐT",
@@ -75,5 +81,34 @@ export const VnLocalizedStrings = {
   Chat: {
     EnterMessage: "Nhập tin nhắn...",
     GetListMessageFailed: "Lỗi lấy danh sách tin nhắn",
+    DeleteChatFailed: "Xóa tin nhắn thất bại",
+    DeleteChatSuccess: "Xóa tin nhắn thành công",
   },
+  Create: {
+    ChooseTopic: "Chọn chủ đề",
+    Question: "Câu hỏi",
+    QuestionPlaceholder: "Nhập câu hỏi...",
+    Now: "Xem ngay với "
+  },
+  Horoscope: {
+    Title: "Thông điệp hằng ngày",
+    InterpretingDestiny: "Giải đoán vận mệnh",
+    Love: "Tình yêu",
+    Finance: "Tài chính",
+    Career: "Sự nghiệp",
+    Health: "Sức khỏe",
+    Luck: "Vận may",
+    LuckyNumber: "Số may mắn",
+    LuckyColor: "Màu may mắn",
+  },
+  Cards: {
+    PickingCards: "Bốc bài",
+    PickingNote: "Hãy nghĩ về câu hỏi, chọn 3 lá bài và bấm vào ô bài.",
+  },
+  Tabbar: {
+    Home: "Trang chủ",
+    Profile: "Tôi",
+    History: "Trò chuyện",
+    Notification: "Thống báo",
+  }
 };

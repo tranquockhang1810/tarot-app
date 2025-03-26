@@ -14,6 +14,7 @@ export const ENGLocalizedStrings = {
     Apply: "Apply",
     Report: "Report",
     Delete: "Delete",
+    DeleteChat: "Are you sure you want to delete this chat?",
     Day: "Day",
     Remain: "Only",
     Confirm: "Confirm",
@@ -21,13 +22,18 @@ export const ENGLocalizedStrings = {
     Opened: "Opened",
     Closed: "Closed",
     All: "All",
-    DateRange: "Date range"
+    DateRange: "Date range",
+    Options: "Options",
+    Cards: "Cards",
+    Submit: "Submit"
   },
   Topics: {
     health: "Health",
     love: "Love",
     finance: "Finance",
     family: "Family",
+    career: "Career",
+    social: "Social"
   },
   Login: {
     LoginByPhone: "Login by phone",
@@ -75,5 +81,34 @@ export const ENGLocalizedStrings = {
   Chat: {
     EnterMessage: "Enter message...",
     GetListMessageFailed: "Get list message failed",
+    DeleteChatFailed: "Delete chat failed",
+    DeleteChatSuccess: "Delete chat successfully",
+  },
+  Create: {
+    ChooseTopic: "Choose a topic",
+    Question: "Question",
+    QuestionPlaceholder: "Please enter a question...",
+    Now: "Watch now with "
+  },
+  Horoscope: {
+    Title: "Daily Horoscope",
+    InterpretingDestiny: "Interpreting Destiny",
+    Love: "Love",
+    Finance: "Finance",
+    Career: "Career",
+    Health: "Health",
+    Luck: "Luck",
+    LuckyNumber: "Lucky number",
+    LuckyColor: "Lucky color",
+  },
+  Cards: {
+    PickingCards: "Pick cards",
+    PickingNote: "Think about your question, choose 3 cards, and tap on the card slot."
+  },
+  Tabbar: {
+    Home: "Home",
+    Profile: "Profile",
+    History: "Chat",
+    Notification: "Notification",
   }
 }

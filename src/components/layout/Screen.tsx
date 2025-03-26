@@ -5,11 +5,15 @@ import useColor from '@/src/hooks/useColor';
 const Screen = ({
   children,
   style,
+  backgroundColor,
   header,
+  headerBackgroundColor,
 }: {
   children?: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  backgroundColor?: string;
   header?: () => React.JSX.Element;
+  headerBackgroundColor?: string;
 }) => {
   const { brandPrimaryDark, brandPrimaryTap } = useColor();
 
@@ -18,13 +22,13 @@ const Screen = ({
       style={StyleSheet.flatten([
         {
           flex: 1,
-          backgroundColor: brandPrimaryDark,
+          backgroundColor: backgroundColor || brandPrimaryDark,
           paddingTop: header ? 0 : 30,
         },
         style,
       ])}
     >
-      {header && <View style={{ ...styles.header, backgroundColor: brandPrimaryTap }}>{header()}</View>}
+      {header && <View style={{ ...styles.header, backgroundColor: headerBackgroundColor || brandPrimaryTap }}>{header()}</View>}
       {children}
     </View>
   );

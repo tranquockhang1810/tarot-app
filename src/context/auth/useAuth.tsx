@@ -60,7 +60,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     // await AsyncStorage.removeItem('refreshtoken');
     setIsAuthenticated(false);
     setUser(null);
-    router.replace('/login');
+    router.replace('/(anonymous)/login');
   }
 
   const isLoginUser = (userId: string) => {

@@ -7,6 +7,7 @@ const useColor = () => {
   const redError = "#FE5E5E"
   const orange = "#FEB05E"
   const violet = "#653E8D"
+  const violetRGB = (opacity: number) => `rgba(101, 62, 141, ${opacity})`
 
   return {
     brandPrimary,
@@ -16,7 +17,8 @@ const useColor = () => {
     brandPrimaryTapRGB,
     redError,
     orange,
-    violet
+    violet,
+    violetRGB
   }
 }
 

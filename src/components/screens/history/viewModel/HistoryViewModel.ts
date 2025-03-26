@@ -1,4 +1,5 @@
 import { ResultObject } from "@/src/api/baseApiResponseModel/baseApiResponseModel";
+import { defaultChatRepo } from "@/src/api/features/chat/ChatRepo";
 import { defaultHistoryRepo } from "@/src/api/features/history/HistoryRepo";
 import { ChatListRequestModel, ChatListResponseModel } from "@/src/api/features/history/models/ChatListModel";
 import { TopicResponseModel } from "@/src/api/features/topic/models/TopicModel";
@@ -29,6 +30,8 @@ const HistoryViewModel = () => {
   const statusRefs = useRef<string>("");
   const [resetFlag, setResetFlag] = useState(false);
   const [dateFilterType, setDateFilterType] = useState<string>("all");
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [selectedChat, setSelectedChat] = useState<ChatListResponseModel | null>(null)
 
   const statusList = [
     { label: localStrings.GLobals.Opened, value: "true" },
@@ -82,7 +85,7 @@ const HistoryViewModel = () => {
   const refreshListChats = async () => {
     try {
       setRefreshing(true);
-      await getListChats({ page: 1, limit: 12 });
+      await getListChats(query);
     } catch (error: any) {
       console.error(error);
       setResultObject({
@@ -138,6 +141,35 @@ const HistoryViewModel = () => {
     setResetFlag(prev => !prev);
   };
 
+  const deleteChat = async (id: string) => {
+    try {
+      setDeleteLoading(true);
+      const res = await defaultChatRepo.deleteChat({ id });
+      if (res?.code === 200) {
+        setResultObject({
+          type: "success",
+          title: localStrings.Chat.DeleteChatSuccess,
+        });
+        getListChats(query)
+      } else {
+        setResultObject({
+          type: "error",
+          title: localStrings.Chat.DeleteChatFailed,
+          content: res?.message,
+        });
+      }
+    } catch (error: any) {
+      console.error("🚨 Error:", error);
+      setResultObject({
+        type: "error",
+        title: localStrings.GLobals.ErrorMessage,
+        content: error?.message,
+      })
+    } finally {
+      setDeleteLoading(false);
+    }
+  }
+
   useFocusEffect(
     useCallback(() => {
       setMessages([]);
@@ -175,7 +207,10 @@ const HistoryViewModel = () => {
     statusList,
     resetFilter,
     resetFlag,
-    dateFilterType, setDateFilterType
+    dateFilterType, setDateFilterType,
+    deleteLoading,
+    deleteChat,
+    selectedChat, setSelectedChat
   }
 }
 

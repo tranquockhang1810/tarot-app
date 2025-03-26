@@ -3,4 +3,9 @@ export interface TopicResponseModel {
   name?: string
   image?: string
   code?: string
+  price?: number
 }
+
+export type TopicsType = {
+  [key: string]: string;
+};

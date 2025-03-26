@@ -13,14 +13,13 @@ const MessageContext = createContext<MessageContextType | undefined>(undefined);
 
 export const MessageProvider = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
-  const [messages, setMessages] = useState<MessageResponseModel[]>([]);
+  const [messages, setMessages] = useState<MessageResponseModel[] | undefined>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isNewMessage, setIsNewMessage] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!user?._id) return; // Nếu chưa có user, không kết nối socket
+    if (!user?._id) return;
 
     const newSocket = io(SOCKET_URL, { transports: ["websocket"] });
 
@@ -36,13 +35,14 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
     });
 
     newSocket.on("newMessage", (message: MessageResponseModel) => {
-      if (message.senderType === "ai") {
-        setIsLoading(false);
-        setMessages((prev) => prev.filter((msg) => msg._id !== "loading" && msg._id !== "client"));
-      }
-
       setIsNewMessage((prev) => !prev);
-      setMessages((prev) => [message, ...prev]);
+      setMessages((prev) => [message, ...prev || []]);
+    });
+
+    newSocket.on("replaceMessage", ({ oldId, newMessage }) => {
+      setMessages((prev) =>
+        prev && prev.map((msg) => (msg._id === oldId ? newMessage : msg))
+      );
     });
 
     newSocket.on("errorMessage", (error: { message: string }) => {
@@ -64,7 +64,6 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
         return;
       }
       socket.emit("sendMessage", { userID: user?._id, chatID, message });
-      setIsLoading(true);
     },
     [socket, isConnected, user?._id]
   );
@@ -82,7 +81,7 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
 
   return (
     <MessageContext.Provider
-      value={{ messages, setMessages, sendMessage, isConnected, isLoading, updateMessageSeen, isNewMessage }}
+      value={{ messages, setMessages, sendMessage, isConnected, updateMessageSeen, isNewMessage }}
     >
       {children}
     </MessageContext.Provider>
