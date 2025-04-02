@@ -8,6 +8,7 @@ import useColor from "@/src/hooks/useColor";
 import { Button } from "@ant-design/react-native";
 import { useAuth } from "@/src/context/auth/useAuth";
 import CardViewModel from "../viewModel/CardViewModel";
+import { CARD_BACKGROUND } from "@/src/consts/ImgPath";
 
 const CardScreen = ({ id }: { id: string | string[] }) => {
   const { localStrings } = useAuth();
@@ -128,7 +129,7 @@ const CardScreen = ({ id }: { id: string | string[] }) => {
                   <TarotCard
                     key={index}
                     index={index}
-                    uri={"https://res.cloudinary.com/dfqgxpk50/image/upload/v1742453087/tarot-app/21862422_6510789_qyogvb.jpg"}
+                    uri={CARD_BACKGROUND}
                     totalCards={remainingCards.length}
                     selectedCard={selectedCard}
                     setSelectedCard={setSelectedCard}

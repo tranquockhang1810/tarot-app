@@ -40,6 +40,7 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
     });
 
     newSocket.on("replaceMessage", ({ oldId, newMessage }) => {
+      setIsNewMessage((prev) => !prev);
       setMessages((prev) =>
         prev && prev.map((msg) => (msg._id === oldId ? newMessage : msg))
       );

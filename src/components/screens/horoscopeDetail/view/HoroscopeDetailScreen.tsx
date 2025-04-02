@@ -13,7 +13,7 @@ import useColor from '@/src/hooks/useColor';
 
 const HoroscopeDetailScreen = () => {
   const { localStrings } = useAuth();
-  const { brandPrimaryTap, redError, brandPrimary, brandPrimaryDark } = useColor();
+  const { brandPrimaryTap, redError, brandPrimary, blue } = useColor();
   const { date } = useLocalSearchParams<{ date: string }>();
   const {
     resultObject,
@@ -84,11 +84,11 @@ const HoroscopeDetailScreen = () => {
               }}
             >
               <View style={{ marginTop: 90, flexDirection: "row", alignItems: "center", justifyContent: "center", flexWrap: "wrap" }}>
-                <MaterialCommunityIcons name="star-four-points" size={24} color="yellow" />
+                <MaterialCommunityIcons name="star-four-points" size={24} color={blue} />
                 <Text style={{ fontSize: 20, fontWeight: "bold", color: "white", marginHorizontal: 10 }}>
                   {localStrings?.Horoscope?.InterpretingDestiny}
                 </Text>
-                <MaterialCommunityIcons name="star-four-points" size={24} color="yellow" />
+                <MaterialCommunityIcons name="star-four-points" size={24} color={blue} />
               </View>
               <Text style={{ fontSize: 16, color: "white" }}>
                 {horoscope?.summary}

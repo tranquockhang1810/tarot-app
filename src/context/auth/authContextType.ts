@@ -1,6 +1,6 @@
 import { VnLocalizedStrings } from "@/src/utils/localizedStrings/vietnam";
 import { ENGLocalizedStrings } from "@/src/utils/localizedStrings/english";
-import { UserModel } from "@/src/api/features/login/models/UserModel";
+import { UserModel } from "@/src/api/features/profile/models/UserModel";
 import { LoginResponseModel } from "@/src/api/features/login/models/LoginModel";
 
 export interface AuthContextType {
@@ -15,4 +15,5 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   isLoginUser: (userId: string) => boolean;
   checkAuthLoading: boolean;
+  getUser: () => Promise<void>;
 }

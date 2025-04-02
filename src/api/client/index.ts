@@ -45,7 +45,7 @@ api.interceptors.response.use(
       Modal.alert(
         "Session Expired",
         "Your session has expired. Please login again.",
-        [{ text: "OK", onPress: () => router.replace(`/login`), style: "cancel" }],
+        [{ text: "OK", onPress: () => router.replace(`/(anonymous)/login`), style: "cancel" }],
       );
     }
     return Promise.resolve(error?.response?.data);

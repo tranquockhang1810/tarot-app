@@ -67,7 +67,7 @@ const CreateScreen = () => {
                   onPress={() => setSelectedTopic(topic)}
                 >
                   <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Image source={{ uri: topic?.image }} style={{ width: 100, height: 100, borderRadius: 50 }} />
+                    <Image source={{ uri: `${process.env.EXPO_PUBLIC_SERVER_ENDPOINT! + topic?.image}` }} style={{ width: 100, height: 100, borderRadius: 50 }} />
                     <Text style={{ color: 'white', marginTop: 5 }}>
                       {(localStrings.Topics as TopicsType)[topic?.code || ""]}
                     </Text>

@@ -7,19 +7,15 @@ import { router } from 'expo-router';
 import dayjs from 'dayjs';
 
 const HomeScreen = () => {
-  const { onLogout, changeLanguage } = useAuth();
+  const { onLogout, changeLanguage, localStrings } = useAuth();
   return (
     <Screen>
-      <Text style={{ color: 'white' }}>HomeScreen</Text>
       <Button onPress={() => router.push({
         pathname: `/(routes)/horoscope/details`,
         params: {
           date: dayjs().format('YYYY-MM-DD')
         }
-      })}>Thông điệp hôm nay</Button>
-      <Button onPress={() => router.push(`/(routes)/horoscope`)} style={{ marginVertical: 20 }}>LS thông điệp</Button>
-      <Button onPress={onLogout}>Logout</Button>
-      <Button onPress={() => changeLanguage()} style={{ marginVertical: 20 }}>Đổi ngôn ngữ</Button>
+      })}>{localStrings.Horoscope.Today}</Button>
     </Screen>
   )
 }

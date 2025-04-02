@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react"
 
 const CreateViewModel = () => {
   const [resultObject, setResultObject] = useState<ResultObject | null>(null);
-  const { localStrings } = useAuth();
+  const { localStrings, getUser } = useAuth();
   const [topics, setTopics] = useState<TopicResponseModel[]>([]);
   const [selectedTopic, setSelectedTopic] = useState<TopicResponseModel | null>(null)
   const questionRef = useRef<string>("")
@@ -40,6 +40,7 @@ const CreateViewModel = () => {
         question: questionRef?.current
       })
       if (res?.code === 200 && res?.data) {
+        await getUser();
         setSelectedTopic(null)
         questionRef.current = ""
         router.replace({

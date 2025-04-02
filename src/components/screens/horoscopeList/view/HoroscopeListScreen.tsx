@@ -15,7 +15,7 @@ import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, w
 
 const HoroscopeListScreen = () => {
   const { localStrings } = useAuth();
-  const { brandPrimaryRGB } = useColor();
+  const { brandPrimaryRGB, blue } = useColor();
   const {
     list,
     loading,
@@ -104,7 +104,7 @@ const HoroscopeListScreen = () => {
                     </Text>
                     {index === 0 && (
                       <Animated.View style={animatedStyle}>
-                        <MaterialCommunityIcons name="star-four-points" size={24} color="yellow" />
+                        <MaterialCommunityIcons name="star-four-points" size={24} color={blue} />
                       </Animated.View>
                     )}
                   </View>

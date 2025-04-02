@@ -9,4 +9,5 @@ export interface UserModel {
   type?: "phone" | "facebook";
   avatar?: string;
   point?: number;
+  zodiac?: string;
 }

@@ -1,4 +1,4 @@
-import { UserModel } from "./UserModel"
+import { UserModel } from "../../profile/models/UserModel"
 
 export interface LoginResponseModel {
   accessToken?: string

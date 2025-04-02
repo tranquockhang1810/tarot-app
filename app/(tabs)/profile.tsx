@@ -1,12 +1,9 @@
-import { Text } from 'react-native'
 import React from 'react'
-import Screen from '@/src/components/layout/Screen';
+import ProfileScreen from '@/src/components/screens/profile/view/ProfileScreen';
 
 const profile = () => {
   return (
-    <Screen>
-      <Text style={{ color: 'white' }}>ProfileScreen</Text>
-    </Screen>
+    <ProfileScreen />
   )
 }
 

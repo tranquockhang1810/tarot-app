@@ -4,6 +4,10 @@ export const ApiPath = {
   REGISTER:  getApiPath("auth/register"),
   LOGIN_FACEBOOK: getApiPath("auth/login-by-facebook"),
 
+  //Profile
+  GET_PROFILE: getApiPath("auth/user"),
+  UPDATE_PROFILE: getApiPath("auth/update"),
+
   //Topic
   GET_TOPICS: getApiPath("topic/list"),
 

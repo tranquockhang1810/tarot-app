@@ -27,8 +27,6 @@ const RegisterViewModel = () => {
         gender: form.getFieldValue('gender') || undefined,
         type: form.getFieldValue('type') || undefined,
       }
-      console.log("params", params);
-
       const res = await defaultLoginRepository.register(params);
       if (res?.data) {
         onLogin(res?.data);

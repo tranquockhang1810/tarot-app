@@ -74,7 +74,7 @@ const HistoryScreen = () => {
   const sider = (
     <View
       style={{
-        height: dateFilterType === "range" ? 400 : 380,
+        height: dateFilterType === "range" ? 430 : 400,
         width: 280,
         backgroundColor: brandPrimaryTap,
         marginTop: 20,
@@ -274,7 +274,7 @@ const HistoryScreen = () => {
               >
                 <TouchableOpacity onPress={() => router.push(`/(routes)/chat/${item?._id}`)}>
                   <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingTop: 20 }}>
-                    <Image source={{ uri: item.topic?.image }} style={{ width: 60, height: 60, borderRadius: 50 }} />
+                    <Image source={{ uri: `${process.env.EXPO_PUBLIC_SERVER_ENDPOINT! + item.topic?.image}` }} style={{ width: 60, height: 60, borderRadius: 50 }} />
                     <View style={{ flex: 1, marginLeft: 15, backgroundColor: violet, padding: 10, borderRadius: 10 }}>
                       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Text style={{ color: "white", opacity: 0.6, fontSize: 12 }}>{createdDate}</Text>

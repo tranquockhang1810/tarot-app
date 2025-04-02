@@ -5,8 +5,9 @@ import { ENGLocalizedStrings } from "@/src/utils/localizedStrings/english";
 import translateLanguage from '../../utils/i18n/translateLanguage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
-import { UserModel } from '../../api/features/login/models/UserModel';
+import { UserModel } from '../../api/features/profile/models/UserModel';
 import { LoginResponseModel } from '@/src/api/features/login/models/LoginModel';
+import { defaultProfileRepo } from '@/src/api/features/profile/ProfileRepo';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -38,7 +39,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const onLogin = async (user: LoginResponseModel) => {
-    await AsyncStorage.setItem('user', JSON.stringify(user?.user));
     await AsyncStorage.setItem('accesstoken', user?.accessToken || '');
     setIsAuthenticated(true);
     setUser(user?.user || null);
@@ -46,10 +46,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }
 
   const onUpdateProfile = async (user: UserModel) => {
-    await AsyncStorage.removeItem('user');
-    await AsyncStorage.setItem('user', JSON.stringify(user));
-    // AsyncStorage.setItem('refreshtoken', user.refreshtoken);
-    setIsAuthenticated(true);
     setUser(user);
   }
 
@@ -67,6 +63,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return user?.id === userId;
   }
 
+  const getUser = async () => {
+    try {
+      const res = await defaultProfileRepo.getProfile();
+      if (res?.code === 200 && res?.data) {
+        setUser(res?.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     checkLanguage();
   }, [language]);
@@ -74,12 +81,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const storedUser = await AsyncStorage.getItem('user');
         const storedAccessToken = await AsyncStorage.getItem('accesstoken');
-
-        if (storedUser && storedAccessToken) {
-          setUser(JSON.parse(storedUser));
+        if (storedAccessToken) {
           setIsAuthenticated(true);
+          getUser();
         } else {
           setIsAuthenticated(false);
         }
@@ -105,7 +110,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       user,
       onUpdateProfile,
       isLoginUser,
-      checkAuthLoading
+      checkAuthLoading,
+      getUser
     }}
     >
       {children}

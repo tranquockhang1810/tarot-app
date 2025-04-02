@@ -25,7 +25,11 @@ export const VnLocalizedStrings = {
     DateRange: "Khoảng ngày",
     Options: "Tùy chọn",
     Cards: "Lá bài",
-    Submit: "Xác nhận"
+    Submit: "Xác nhận",
+    Logout: "Đăng xuất",
+    LogoutMessage: "Bạn có chắc muốn đăng xuất tài khoản này?",
+    Language: "English",
+    Edit: "Chỉnh sửa",
   },
   Topics: {
     health: "Sức khỏe",
@@ -92,6 +96,7 @@ export const VnLocalizedStrings = {
   },
   Horoscope: {
     Title: "Thông điệp hằng ngày",
+    Today: "Thông điệp hôm nay",
     InterpretingDestiny: "Giải đoán vận mệnh",
     Love: "Tình yêu",
     Finance: "Tài chính",
@@ -110,5 +115,19 @@ export const VnLocalizedStrings = {
     Profile: "Tôi",
     History: "Trò chuyện",
     Notification: "Thống báo",
+  },
+  Profile: {
+    Title: "Trang cá nhân",
+    Point: "Điểm",
+    PointNote: "Điểm tích lũy để sử dụng các dịch vụ",
+    TransHistory: "Lịch sử giao dịch",
+    TransHistoryNote: "Lưu lại lịch sử biến động điểm",
+    Horoscope: "Thông điệp hằng ngày",
+    HoroscopeNote: "Thông điệp vũ trụ 3 ngày vừa qua của bạn",
+  },
+  Setting: {
+    Title: "Cài đặt",
+    UpdateProfileSuccess: "Cập nhật thông tin thành công",
+    UpdateProfileFailed: "Cập nhật thông tin thất bại",
   }
 };

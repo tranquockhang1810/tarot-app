@@ -63,7 +63,7 @@ const ChatScreen = ({ id }: { id: string | string[] }) => {
             {!chatInfo ? null : (
               <View style={{ flexDirection: "row", alignItems: "center", flex: 1, justifyContent: "space-between" }}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Image source={{ uri: chatInfo?.topic?.image }} style={{ width: 50, height: 50, borderRadius: 50 }} />
+                  <Image source={{ uri: `${process.env.EXPO_PUBLIC_SERVER_ENDPOINT! + chatInfo?.topic?.image}` }} style={{ width: 50, height: 50, borderRadius: 50 }} />
                   <View style={{ flexDirection: "column", justifyContent: "space-between", marginLeft: 10 }}>
                     <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>{createdDate}</Text>
                     {chatInfo?.status ? (

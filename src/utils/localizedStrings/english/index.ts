@@ -25,7 +25,11 @@ export const ENGLocalizedStrings = {
     DateRange: "Date range",
     Options: "Options",
     Cards: "Cards",
-    Submit: "Submit"
+    Submit: "Submit",
+    Logout: "Logout",
+    LogoutMessage: "Are you sure you want to logout?",
+    Language: "Tiếng Việt",
+    Edit: "Edit",
   },
   Topics: {
     health: "Health",
@@ -92,6 +96,7 @@ export const ENGLocalizedStrings = {
   },
   Horoscope: {
     Title: "Daily Horoscope",
+    Today: "Today's horoscope",
     InterpretingDestiny: "Interpreting Destiny",
     Love: "Love",
     Finance: "Finance",
@@ -110,5 +115,19 @@ export const ENGLocalizedStrings = {
     Profile: "Profile",
     History: "Chat",
     Notification: "Notification",
+  },
+  Profile: {
+    Title: "My profile",
+    Point: "Points",
+    PointNote: "Accumulated points for using services",
+    TransHistory: "Transaction History",
+    TransHistoryNote: "Records of point changes",
+    Horoscope: "Daily Message",
+    HoroscopeNote: "Your cosmic messages from the past 3 days",
+  },
+  Setting: {
+    Title: "Settings",
+    UpdateProfileSuccess: "Update profile successfully",
+    UpdateProfileFailed: "Update profile failed",
   }
 }
