@@ -26,11 +26,19 @@ export const ApiPath = {
   //Horoscope
   GET_HOROSCOPE: getApiPath("horoscope/user"),
   GET_HOROSCOPE_DETAIL: getApiPath("horoscope/daily"),
+
+  //Topup
+  GET_PACKAGE_LIST: getApiPath("package/list"),
+  CREATE_BILL: getApiPath("bill/create"),
+  PAYED_RESULT: getApiPath("bill/success"),
+
+  //Transaction History
+  TRANSACTION_HISTORY: getApiPath("bill/list"),
+
+  //Notification
+  NOTIFICATION: getApiPath("notification/list"),
 };
 
 function getApiPath(path: string) {
   return `${process.env.EXPO_PUBLIC_SERVER_ENDPOINT!}/api/v1/${path}`;
-}
-function getWSPath(path: string) {
-  return `${process.env.EXPO_PUBLIC_SERVER_ENDPOINT!.replace("http", "ws")!}/v1/2024/${path}`;
 }

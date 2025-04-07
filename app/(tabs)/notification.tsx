@@ -1,12 +1,9 @@
-import { View, Text } from 'react-native'
 import React from 'react'
-import Screen from '@/src/components/layout/Screen'
+import NotificationScreen from '@/src/components/screens/notification/view/NotificationScreen'
 
 const notification = () => {
   return (
-    <Screen>
-      <Text style={{ color: 'white' }}>NotificationScreen</Text>
-    </Screen>
+    <NotificationScreen />
   )
 }
 

@@ -11,7 +11,7 @@ import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const HistoryViewModel = () => {
-  const { isNewMessage, setMessages } = useMessage();
+  const { isNewMessage, setMessages, setHaveUnreadMessages } = useMessage();
   const [resultObject, setResultObject] = useState<ResultObject | null>(null);
   const [listLoading, setListLoading] = useState(false);
   const [listChats, setListChats] = useState<ChatListResponseModel[] | undefined>([]);
@@ -50,7 +50,6 @@ const HistoryViewModel = () => {
           );
           return prev ? [...prev, ...newChats] : res.data;
         });
-
         setPage(res?.paging?.page);
         setHasMore(res?.paging?.page < res?.paging?.totalPages);
       } else {
@@ -181,6 +180,14 @@ const HistoryViewModel = () => {
   useEffect(() => {
     getTopicList();
   }, [])
+
+  useEffect(() => {
+    if (listChats?.some((chat) => chat.latestMessage?.status === false)) {
+      setHaveUnreadMessages(true);
+    } else {
+      setHaveUnreadMessages(false);
+    }
+  }, [listChats])
 
   return {
     resultObject,

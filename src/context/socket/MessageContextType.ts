@@ -7,4 +7,9 @@ export interface MessageContextType {
   isConnected: boolean;
   updateMessageSeen: (chatId: string) => void;
   isNewMessage: boolean;
+  haveUnreadMessages: boolean;
+  setHaveUnreadMessages: React.Dispatch<React.SetStateAction<boolean>>;
+  seenNotification: (id?: string) => void;
+  unreadNotification: number;
+  checkUnreadNotification: () => void;
 }

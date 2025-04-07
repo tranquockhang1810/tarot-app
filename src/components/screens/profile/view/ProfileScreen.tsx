@@ -116,6 +116,7 @@ const ProfileScreen = () => {
                 flexWrap: "wrap", flexDirection: "row",
                 justifyContent: "space-between",
               }}
+              onPress={() => router.push("/(routes)/top-up")}
             >
               <View style={{ alignItems: "center", justifyContent: "flex-start", flexWrap: "wrap", flexDirection: "row" }}>
                 <FontAwesome6 name="coins" size={40} color="yellow" />
@@ -134,6 +135,7 @@ const ProfileScreen = () => {
                 flexWrap: "wrap", flexDirection: "row",
                 justifyContent: "space-between"
               }}
+              onPress={() => router.push("/(routes)/transaction-history")}
             >
               <View style={{ alignItems: "center", justifyContent: "flex-start", flexWrap: "wrap", flexDirection: "row" }}>
                 <MaterialIcons name="history" size={40} color={orange} />

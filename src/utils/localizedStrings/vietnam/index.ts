@@ -30,6 +30,8 @@ export const VnLocalizedStrings = {
     LogoutMessage: "Bạn có chắc muốn đăng xuất tài khoản này?",
     Language: "English",
     Edit: "Chỉnh sửa",
+    Success: "Thành công",
+    Failed: "Thất bại",
   },
   Topics: {
     health: "Sức khỏe",
@@ -114,7 +116,7 @@ export const VnLocalizedStrings = {
     Home: "Trang chủ",
     Profile: "Tôi",
     History: "Trò chuyện",
-    Notification: "Thống báo",
+    Notification: "Thông báo",
   },
   Profile: {
     Title: "Trang cá nhân",
@@ -129,5 +131,18 @@ export const VnLocalizedStrings = {
     Title: "Cài đặt",
     UpdateProfileSuccess: "Cập nhật thông tin thành công",
     UpdateProfileFailed: "Cập nhật thông tin thất bại",
+  },
+  Topup: {
+    Title: "Gói điểm",
+    GetListPackageFailed: "Lấy danh sách gói thất bại",
+    Pay: "Thanh toán",
+    CreateBillFailed: "Thanh toán thất bại",
+    CreateBillSuccess: "Thanh toán thành công",
+  },
+  Transaction: {
+    GetListBillFailed: "Lấy danh sách thất bại",
+    Package: "Gói điểm",
+    Point: "Điểm",
+    TopupPoint: "Nạp điểm",
   }
 };

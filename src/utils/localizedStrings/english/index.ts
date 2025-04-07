@@ -30,6 +30,8 @@ export const ENGLocalizedStrings = {
     LogoutMessage: "Are you sure you want to logout?",
     Language: "Tiếng Việt",
     Edit: "Edit",
+    Success: "Success",
+    Failed: "Failed",
   },
   Topics: {
     health: "Health",
@@ -129,5 +131,18 @@ export const ENGLocalizedStrings = {
     Title: "Settings",
     UpdateProfileSuccess: "Update profile successfully",
     UpdateProfileFailed: "Update profile failed",
+  },
+  Topup: {
+    Title: "Point packages",
+    GetListPackageFailed: "Get list package failed",
+    Pay: "Pay",
+    CreateBillFailed: "Pay failed",
+    CreateBillSuccess: "Pay successfully",
+  },
+  Transaction: {
+    GetListBillFailed: "Get list bill failed",
+    Package: "Packages",
+    Point: "Points",
+    TopupPoint: "Top up points",
   }
 }

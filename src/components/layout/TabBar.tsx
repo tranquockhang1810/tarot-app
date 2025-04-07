@@ -1,4 +1,5 @@
 import { useAuth } from '@/src/context/auth/useAuth';
+import { useMessage } from '@/src/context/socket/useMessage';
 import useColor from '@/src/hooks/useColor';
 import { Badge } from '@ant-design/react-native';
 import { MaterialCommunityIcons, FontAwesome, Entypo } from '@expo/vector-icons';
@@ -8,6 +9,8 @@ import { TouchableOpacity, View, StyleSheet } from 'react-native';
 const TabBar = () => {
   const { brandPrimaryTap, brandPrimaryDark, redError } = useColor();
   const { localStrings } = useAuth();
+  const { haveUnreadMessages, unreadNotification } = useMessage();
+
   return (
     <Tabs
       screenOptions={{
@@ -38,7 +41,9 @@ const TabBar = () => {
           title: localStrings.Tabbar.History,
           tabBarIcon: ({ color }) => (
             <View style={styles.iconWrapper}>
-              <Entypo size={30} name="chat" color={color} />
+              <Badge dot={haveUnreadMessages} styles={{ dot: { backgroundColor: redError } }}>
+                <Entypo size={30} name="chat" color={color} />
+              </Badge>
             </View>
           ),
         }}
@@ -65,7 +70,7 @@ const TabBar = () => {
           title: localStrings.Tabbar.Notification,
           tabBarIcon: ({ color }) => (
             <View style={styles.iconWrapper}>
-              <Badge dot styles={{ dot: { backgroundColor: redError } }}>
+              <Badge dot={unreadNotification > 0} styles={{ dot: { backgroundColor: redError } }}>
                 <FontAwesome size={28} name="bell" color={color} />
               </Badge>
             </View>

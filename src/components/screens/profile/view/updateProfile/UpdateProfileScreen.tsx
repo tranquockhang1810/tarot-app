@@ -70,7 +70,7 @@ const UpdateProfileScreen = () => {
                 <View style={{ alignItems: "center", justifyContent: "center" }}>
                   <Image
                     source={{ uri: image?.uri! || `${user?.avatar}` || AVARTAR_IMAGE }}
-                    style={{ width: 180, height: 180, borderRadius: 90, position: "relative", borderColor: "white", borderWidth: 5 }}
+                    style={{ width: 140, height: 140, borderRadius: 90, position: "relative", borderColor: "white", borderWidth: 5 }}
                   />
                   <TouchableOpacity
                     style={{
@@ -95,8 +95,8 @@ const UpdateProfileScreen = () => {
               {/* Content */}
               <View
                 style={{
-                  paddingHorizontal: 20, marginTop: -90,
-                  paddingTop: 100,
+                  paddingHorizontal: 20, marginTop: -70,
+                  paddingTop: 50,
                   paddingBottom: 40,
                   backgroundColor: brandPrimaryTap,
                   borderRadius: 15,
@@ -142,7 +142,7 @@ const UpdateProfileScreen = () => {
                         color: "white",
                         fontSize: 24,
                         fontWeight: "bold",
-                        marginTop: 20
+                        marginTop: 15
                       }}
                     >
                       {localStrings.Register.Label.Phone}
@@ -158,7 +158,8 @@ const UpdateProfileScreen = () => {
                         padding: 15,
                         borderRadius: 10,
                         fontSize: 20,
-                        fontWeight: "bold"
+                        fontWeight: "bold",
+                        opacity: editMode ? 0.8 : 1
                       }}
                       editable={false}
                       defaultValue={user?.phone}
@@ -175,7 +176,7 @@ const UpdateProfileScreen = () => {
                       color: "white",
                       fontSize: 24,
                       fontWeight: "bold",
-                      marginTop: 20
+                      marginTop: 15
                     }}
                   >
                     {localStrings.Register.Label.Birthday}
@@ -210,7 +211,7 @@ const UpdateProfileScreen = () => {
                       color: "white",
                       fontSize: 24,
                       fontWeight: "bold",
-                      marginTop: 20,
+                      marginTop: 15,
                       marginBottom: 10
                     }}
                   >
@@ -269,7 +270,7 @@ const UpdateProfileScreen = () => {
                   style={{
                     width: "100%",
                     height: 60,
-                    marginTop: 20,
+                    marginTop: 15,
                     borderRadius: 15,
                     backgroundColor: brandPrimaryTap,
                     justifyContent: "center",
@@ -292,7 +293,7 @@ const UpdateProfileScreen = () => {
                     style={{
                       width: "48%",
                       height: 60,
-                      marginTop: 20,
+                      marginTop: 15,
                       borderRadius: 15,
                       backgroundColor: redError,
                       justifyContent: "center",
@@ -328,7 +329,6 @@ const UpdateProfileScreen = () => {
                   </TouchableOpacity>
                 </View>
               )}
-
               {datePickerModal && <DatePicker
                 date={selectedBirthDate}
                 modal
