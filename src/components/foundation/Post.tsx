@@ -75,8 +75,8 @@ const Post = ({ item }: { item: PostResponseModel }) => {
           {item.images.length === 1 ? (
             <View
               style={{
-                width: width * 0.9,
-                height: width * 0.9,
+                width: width * 0.91,
+                height: width * 0.91,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
@@ -95,8 +95,8 @@ const Post = ({ item }: { item: PostResponseModel }) => {
             <>
               <Carousel
                 loop
-                width={width * 0.9}
-                height={width * 0.9}
+                width={width * 0.91}
+                height={width * 0.91}
                 autoPlay={false}
                 data={item.images}
                 scrollAnimationDuration={500}
