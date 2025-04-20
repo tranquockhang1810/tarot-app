@@ -2,7 +2,7 @@ import { NotificationRequestModel, NotificationResponseModel } from "@/src/api/f
 import { defaultNotificationRepo } from "@/src/api/features/notification/NotificationRepo";
 import { useMessage } from "@/src/context/socket/useMessage"
 import { useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const NotificationViewModel = () => {
   const { seenNotification } = useMessage();
@@ -42,14 +42,23 @@ const NotificationViewModel = () => {
 
   const seenNoti = (id?: string) => {
     seenNotification(id);
+    setPage(1);
     setSeenTrigger((prev) => !prev);
   }
 
   useFocusEffect(
     useCallback(() => {
-      getNotifications({ page, limit: 8 });
-    }, [page, seenTrigger])
+      getNotifications({ page: 1, limit: 8 });
+
+      return () => {
+        setPage(1);
+      }
+    }, [seenTrigger])
   );
+
+  useEffect(() => {
+    page > 1 && getNotifications({ page, limit: 8 });
+  }, [seenTrigger, page])
 
   return {
     notifications,

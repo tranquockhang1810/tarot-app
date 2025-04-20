@@ -5,6 +5,7 @@ import NotificationViewModel from '../viewModel/NotificationViewModel'
 import useColor from '@/src/hooks/useColor'
 import { Ionicons, Octicons } from '@expo/vector-icons'
 import { useAuth } from '@/src/context/auth/useAuth'
+import dayjs from 'dayjs'
 
 const NotificationScreen = () => {
   const {
@@ -54,7 +55,10 @@ const NotificationScreen = () => {
                   />
                 )}
               </View>
-              <Text style={{ color: "white" }}>{item.description}</Text>
+              <Text style={{ color: "white" }} numberOfLines={2}>{item.description}</Text>
+              <Text style={{ color: "white", opacity: 0.6, fontSize: 11, textAlign: "right" }}>
+                {dayjs(item.createdAt).format("HH:mm DD/MM/YYYY")}
+              </Text>
             </TouchableOpacity>
           )}
           keyExtractor={(item) => item?._id || ""}

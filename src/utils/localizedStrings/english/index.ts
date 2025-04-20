@@ -144,5 +144,8 @@ export const ENGLocalizedStrings = {
     Package: "Packages",
     Point: "Points",
     TopupPoint: "Top up points",
+  },
+  Home: {
+    HotNews: "Hot news!"
   }
 }

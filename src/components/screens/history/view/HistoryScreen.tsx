@@ -51,19 +51,11 @@ const HistoryScreen = () => {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          backgroundColor: brandPrimary,
-          borderRadius: 10,
-          paddingHorizontal: 10,
           height: 40,
           flex: 1,
         }}
       >
-        <MaterialIcons name="search" size={20} color="white" />
-        <MyInput
-          placeholder={localStrings.History.FindText}
-          style={{ marginLeft: 10, flex: 1 }}
-          inputStyle={{ color: "white" }}
-        />
+        <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>{localStrings.Tabbar.History}</Text>
       </View>
       <Button style={{ marginLeft: 15, borderRadius: 10, height: 40 }} type="primary" onPress={() => setShowFilter(!showFilter)}>
         <MaterialIcons name="filter-list-alt" size={24} color="white" />

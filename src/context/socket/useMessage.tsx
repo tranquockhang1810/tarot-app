@@ -5,8 +5,6 @@ import { useAuth } from "../auth/useAuth";
 import { MessageContextType } from "./MessageContextType";
 import { MessageResponseModel } from "@/src/api/features/history/models/MessageModel";
 import messaging from '@react-native-firebase/messaging';
-import { NotificationRequestModel, NotificationResponseModel } from "@/src/api/features/notification/models/NotificationModel";
-import { defaultNotificationRepo } from "@/src/api/features/notification/NotificationRepo";
 
 // ⚡ URL socket server
 const SOCKET_URL = process.env.EXPO_PUBLIC_SERVER_ENDPOINT;
@@ -15,7 +13,7 @@ const SOCKET_URL = process.env.EXPO_PUBLIC_SERVER_ENDPOINT;
 const MessageContext = createContext<MessageContextType | undefined>(undefined);
 
 export const MessageProvider = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [messages, setMessages] = useState<MessageResponseModel[] | undefined>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
@@ -25,7 +23,7 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
   const [seenDoneTrigger, setSeenDoneTrigger] = useState(0);
 
   useEffect(() => {
-    if (!user?._id) return;
+    if (!user?._id || !isAuthenticated) return;
     const connectSocket = async () => {
       const hasPermission = await requestNotificationPermission();
       if (!hasPermission) return;
@@ -156,7 +154,7 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
     if (socket && isConnected) {
       checkUnreadNotification();
     }
-  }, [socket, isConnected, seenDoneTrigger]);
+  }, [socket, isConnected, seenDoneTrigger, user]);
 
   return (
     <MessageContext.Provider

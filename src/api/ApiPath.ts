@@ -37,6 +37,9 @@ export const ApiPath = {
 
   //Notification
   NOTIFICATION: getApiPath("notification/list"),
+
+  //Posts
+  GET_POSTS: getApiPath("post/list"),
 };
 
 function getApiPath(path: string) {

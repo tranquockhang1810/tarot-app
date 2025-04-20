@@ -144,5 +144,8 @@ export const VnLocalizedStrings = {
     Package: "Gói điểm",
     Point: "Điểm",
     TopupPoint: "Nạp điểm",
+  },
+  Home: {
+    HotNews: "Thông tin hot!"
   }
 };
