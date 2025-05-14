@@ -13,7 +13,7 @@ import { CurrencyFormat } from '@/src/utils/helper/CurrencyFormat'
 import { showToast } from '@/src/utils/helper/SendMessage'
 
 const TransactionHistoryScreen = () => {
-  const { localStrings } = useAuth();
+  const { localStrings, language } = useAuth();
   const { brandPrimaryDark, brandPrimaryTap, redError } = useColor();
   const {
     billList,
@@ -73,7 +73,7 @@ const TransactionHistoryScreen = () => {
           justifyContent: "center",
           alignItems: "flex-start"
         }}>
-          <Text style={{ color: "white", fontSize: 14, fontWeight: "bold" }}>{`Package ${item?.package?.point} points`}</Text>
+          <Text style={{ color: "white", fontSize: 14, fontWeight: "bold" }}>{language === "en" ? `Package ${item?.package?.point} points` : item?.package?.description}</Text>
           <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>{CurrencyFormat(item?.totalPrice as number)}</Text>
           <View style={{ flex: 1, width: "100%", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
             <Text style={{ color: item?.status ? "palegreen" : redError, fontSize: 14, fontWeight: "bold" }}>{item?.status ? localStrings.GLobals.Success : localStrings.GLobals.Failed}</Text>
