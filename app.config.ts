@@ -1,6 +1,9 @@
 import { ExpoConfig, ConfigContext } from '@expo/config';
 import 'dotenv/config';
 
+const fbAppId = process.env.EXPO_PUBLIC_FACEBOOK_APP_ID || "FAKE_FB_APP_ID";
+const fbClientToken = process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_TOKEN || "FAKE_FB_CLIENT_TOKEN";
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "Tarot AI",
@@ -35,10 +38,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       "react-native-fbsdk-next",
       {
-        appID: process.env.EXPO_PUBLIC_FACEBOOK_APP_ID,
-        clientToken: process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_TOKEN,
+        appID: fbAppId,
+        clientToken: fbClientToken,
         displayName: "Tarot App",
-        scheme: `fb${process.env.EXPO_PUBLIC_FACEBOOK_APP_ID}`,
+        scheme: `fb${fbAppId}`,
         advertiserIDCollectionEnabled: false,
         autoLogAppEventsEnabled: false,
         isAutoInitEnabled: true,
