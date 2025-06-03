@@ -50,8 +50,8 @@ const ProfileScreen = () => {
             >
               <View style={{ alignItems: "center", justifyContent: "flex-start", flexWrap: "wrap", flexDirection: "row" }}>
                 <Image source={{ uri: `${user?.avatar}` || AVARTAR_IMAGE }} style={{ width: 60, height: 60, borderRadius: 50, marginRight: 10 }} />
-                <View>
-                  <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>{user?.name}</Text>
+                <View style={{ maxWidth: "70%" }}>
+                  <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }} ellipsizeMode='tail' numberOfLines={1}>{user?.name}</Text>
                   <Text style={{ color: "white", fontSize: 14, opacity: 0.6 }}>{dayjs(user?.birthDate).format("DD/MM/YYYY")}</Text>
                 </View>
               </View>

@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "tarot-app",
+  name: "Tarot AI",
   slug: "tarot-app",
   version: "1.0.0",
   orientation: "portrait",

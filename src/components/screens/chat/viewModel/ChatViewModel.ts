@@ -11,7 +11,7 @@ const ChatViewModel = (chatID: string) => {
   const [resultObject, setResultObject] = useState<ResultObject | null>(null);
   const [chatsLoading, setChatsLoading] = useState<boolean>(false);
   const [chatInfo, setChatInfo] = useState<ChatResponseModel | null>(null);
-  const { messages, setMessages, sendMessage, isConnected, updateMessageSeen } = useMessage();
+  const { messages, setMessages, sendMessage, isConnected, updateMessageSeen, isNewMessage } = useMessage();
   const [input, setInput] = useState<string>("");
   const { previous } = useLocalSearchParams();
   const [isSendQuestion, setIsSendQuestion] = useState(false);
@@ -120,7 +120,7 @@ const ChatViewModel = (chatID: string) => {
   useFocusEffect(
     useCallback(() => {
       getChatMessages(query);
-    }, [query])
+    }, [query, isNewMessage])
   );
 
   useEffect(() => {
@@ -136,7 +136,7 @@ const ChatViewModel = (chatID: string) => {
   }, [previous, chatID, chatInfo])
 
   useEffect(() => {
-    if (chatInfo && chatInfo?.cards && chatInfo?.cards?.length < 3) {
+    if (chatInfo && chatInfo?.status && chatInfo?.cards && chatInfo?.cards?.length < 3) {
       router.replace(`/card/${chatID}`);
     }
   }, [chatID, chatInfo])

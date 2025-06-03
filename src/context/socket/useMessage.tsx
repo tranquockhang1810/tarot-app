@@ -52,9 +52,9 @@ export const MessageProvider = ({ children }: { children: React.ReactNode }) => 
       newSocket.on("replaceMessage", ({ oldId, newMessage }) => {
         setIsNewMessage((prev) => !prev);
         setHaveUnreadMessages(true);
-        setMessages((prev) =>
-          prev && prev.map((msg) => (msg._id === oldId ? newMessage : msg))
-        );
+        // setMessages((prev) =>
+        //   prev && prev.map((msg) => (msg._id === oldId ? newMessage : msg))
+        // );
       });
 
       newSocket.on("errorMessage", (error: { message: string }) => {
